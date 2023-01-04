@@ -1,0 +1,11 @@
+  =========================================================================
+  ==  NOTICE file for use with the Apache License, Version 2.0           ==
+  =========================================================================
+  
+  Google OAUTH2 Provider, copyright 2019-2020 Google, 2023 Benny Bottema (only for isolated maven release)
+  
+  This product uses no commercial products.
+  
+  This product uses the following external (Open Source) libraries in the deployed code:
+
+    - Google OAUTH2 Provider (sub project @ https://github.com/google/gmail-oauth2-tools)

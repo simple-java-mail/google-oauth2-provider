@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.github.bbottema</groupId>
+		<artifactId>standard-project-parent</artifactId>
+		<version>1.0.24</version>
+	</parent>
+
+	<groupId>org.simplejavamail</groupId>
+	<artifactId>google-oauth2-provider</artifactId>
+	<packaging>jar</packaging>
+	<name>Google OAUTH2 Provider</name>
+	<version>0.0.1</version>
+	<description>Google's reference OAUTH2 Provider implementation isolated from Google's related utilites project over at https://github.com/google/gmail-oauth2-tools</description>
+	<url>https://github.com/simple-java-mail/google-oauth2-provider</url>
+	<inceptionYear>2023</inceptionYear>
+
+	<properties>
+		<license.skip>true</license.skip>
+	</properties>
+
+	<scm>
+		<connection>scm:git:git://github.com/simple-java-mail/google-oauth2-provider.git</connection>
+		<developerConnection>scm:git:git@github.com:simple-java-mail/google-oauth2-provider.git</developerConnection>
+		<url>https://github.com/simple-java-mail/google-oauth2-provider</url>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/simple-java-mail/google-oauth2-provider/issues</url>
+	</issueManagement>
+</project>
