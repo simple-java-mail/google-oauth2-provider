@@ -4,6 +4,11 @@ https://github.com/simple-java-mail/google-oauth2-provider
 RELEASE NOTES Google OAUTH2 Provider
 
 
+v1.0.1 (05 January 2023)
+
+- Reinstated the original copyright boilerplates on the java sources
+
+
 v1.0.0 (04 January 2023)
 
 - Initial release of just the Google OAUTH2 Provider classes, as used by Simple Java Mail, slightly cleaned up and without the demo code.
