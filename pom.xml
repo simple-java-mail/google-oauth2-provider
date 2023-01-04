@@ -13,7 +13,7 @@
 	<artifactId>google-oauth2-provider</artifactId>
 	<packaging>jar</packaging>
 	<name>Google OAUTH2 Provider</name>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<description>Google's reference OAUTH2 Provider implementation isolated from Google's related utilites project over at https://github.com/google/gmail-oauth2-tools</description>
 	<url>https://github.com/simple-java-mail/google-oauth2-provider</url>
 	<inceptionYear>2023</inceptionYear>
