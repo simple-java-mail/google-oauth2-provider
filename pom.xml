@@ -19,6 +19,7 @@
 	<inceptionYear>2023</inceptionYear>
 
 	<properties>
+		<!-- there is a hard coded combined copyright banner in java sources -->
 		<license.skip>true</license.skip>
 	</properties>
 

@@ -1,4 +1,4 @@
-/* Copyright 2012 Google Inc.
+/* Copyright 2012 Google Inc., 2023 Benny Bottema
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.sasl.SaslClient;
 import javax.security.sasl.SaslException;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -30,76 +29,70 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * An OAuth2 implementation of SaslClient.
  */
 class OAuth2SaslClient implements SaslClient {
-  private static final Logger logger =
-      Logger.getLogger(OAuth2SaslClient.class.getName());
 
-  private final String oauthToken;
-  private final CallbackHandler callbackHandler;
+    private final String oauthToken;
+    private final CallbackHandler callbackHandler;
 
-  private boolean isComplete = false;
+    private boolean isComplete = false;
 
-  /**
-   * Creates a new instance of the OAuth2SaslClient. This will ordinarily only
-   * be called from OAuth2SaslClientFactory.
-   */
-  public OAuth2SaslClient(String oauthToken,
-                          CallbackHandler callbackHandler) {
-    this.oauthToken = oauthToken;
-    this.callbackHandler = callbackHandler;
-  }
-
-  public String getMechanismName() {
-    return "XOAUTH2";
-  }
-
-  public boolean hasInitialResponse() {
-    return true;
-  }
-
-  public byte[] evaluateChallenge(byte[] challenge) throws SaslException {
-    if (isComplete) {
-      // Empty final response from server, just ignore it.
-      return new byte[] { };
+    /**
+     * Creates a new instance of the OAuth2SaslClient. This will ordinarily only
+     * be called from OAuth2SaslClientFactory.
+     */
+    public OAuth2SaslClient(String oauthToken, CallbackHandler callbackHandler) {
+        this.oauthToken = oauthToken;
+        this.callbackHandler = callbackHandler;
     }
 
-    NameCallback nameCallback = new NameCallback("Enter name");
-    Callback[] callbacks = new Callback[] { nameCallback };
-    try {
-      callbackHandler.handle(callbacks);
-    } catch (UnsupportedCallbackException e) {
-      throw new SaslException("Unsupported callback: " + e);
-    } catch (IOException e) {
-      throw new SaslException("Failed to execute callback: " + e);
+    public String getMechanismName() {
+        return "XOAUTH2";
     }
-    String email = nameCallback.getName();
 
-    byte[] response = String.format("user=%s\1auth=Bearer %s\1\1", email,
-                                    oauthToken).getBytes(UTF_8);
-    isComplete = true;
-    return response;
-  }
-
-  public boolean isComplete() {
-    return isComplete;
-  }
-
-  public byte[] unwrap(byte[] incoming, int offset, int len)
-      throws SaslException {
-    throw new IllegalStateException();
-  }
-
-  public byte[] wrap(byte[] outgoing, int offset, int len)
-      throws SaslException {
-    throw new IllegalStateException();
-  }
-
-  public Object getNegotiatedProperty(String propName) {
-    if (!isComplete()) {
-      throw new IllegalStateException();
+    public boolean hasInitialResponse() {
+        return true;
     }
-    return null;
-  }
 
-  public void dispose() throws SaslException {
-  }
+    public byte[] evaluateChallenge(byte[] challenge) throws SaslException {
+        if (isComplete) {
+            // Empty final response from server, just ignore it.
+            return new byte[]{};
+        }
+
+        NameCallback nameCallback = new NameCallback("Enter name");
+        Callback[] callbacks = new Callback[]{nameCallback};
+        try {
+            callbackHandler.handle(callbacks);
+        } catch (UnsupportedCallbackException e) {
+            throw new SaslException("Unsupported callback: " + e);
+        } catch (IOException e) {
+            throw new SaslException("Failed to execute callback: " + e);
+        }
+        String email = nameCallback.getName();
+
+        byte[] response = String.format("user=%s\1auth=Bearer %s\1\1", email, oauthToken).getBytes(UTF_8);
+        isComplete = true;
+        return response;
+    }
+
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    public byte[] unwrap(byte[] incoming, int offset, int len) {
+        throw new IllegalStateException();
+    }
+
+    public byte[] wrap(byte[] outgoing, int offset, int len) {
+        throw new IllegalStateException();
+    }
+
+    public Object getNegotiatedProperty(String propName) {
+        if (!isComplete()) {
+            throw new IllegalStateException();
+        }
+        return null;
+    }
+
+    public void dispose() {
+    }
 }
